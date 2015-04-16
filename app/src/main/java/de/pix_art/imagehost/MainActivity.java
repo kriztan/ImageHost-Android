@@ -50,7 +50,16 @@ public class MainActivity extends ActionBarActivity {
         // Set Cancelable as False
         prgDialog.setCancelable(false);
 
-        
+	try {
+	    Intent intent = getIntent();
+	    String action = intent.getAction();
+	    String type = intent.getType();
+	    if (Intent.ACTION_SEND.equals(action) && type != null && type.startsWith("image/")) {
+		displayImageFromIntent(intent);
+	    }
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.fail, Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -58,6 +67,9 @@ public class MainActivity extends ActionBarActivity {
 	// Get the Image from data
 	Uri selectedImage = data.getData();
 	String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+	if (selectedImage == null)
+	    selectedImage = data.getParcelableExtra(Intent.EXTRA_STREAM);
 
 	// Get the cursor
 	Cursor cursor = getContentResolver().query(selectedImage,
