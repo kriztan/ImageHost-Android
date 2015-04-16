@@ -94,6 +94,9 @@ public class MainActivity extends ActionBarActivity {
 	fileName = fileNameSegments[fileNameSegments.length - 1];
 	// Put file name in Async Http Post Param which will used in Php web app
 	//params.put("filename", fileName);
+
+	// immediately upload the image
+	uploadImage(null);
     }
 
     public void loadImagefromGallery(View view) {
@@ -223,7 +226,7 @@ public class MainActivity extends ActionBarActivity {
                         sendIntent.setType("text/plain");
                         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
                         // share link via button
-                        // ToDo...
+                        finish();
 
                     }
 
