@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ImageHost</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="send_to">Teile Link mit</string>
+    <string name="no_image">Du hast kein Bild ausgewählt</string>
+    <string name="fail">Ein Fehler ist aufgetreten</string>
+    <string name="preparing_image">Bild wird aufbereitet</string>
+    <string name="choose_image">Du musst ein Bild auswählen</string>
+    <string name="uploading">Bild wird hochgeladen</string>
+    <string name="convert_image">Bild wird verarbeitet</string>
+    <string name="error_404">Fehler: Der Host kann nicht gefunden werden</string>
+    <string name="error_500">Serverfehler</string>
+    <string name="error">Es ist ein Fehler aufgetreten. HTTP Status Code:</string>
+    <string name="load_image">Wähle Bild aus</string>
+    <string name="upload">Bild hochladen</string>
+    <string name="share_image">Bild teilen</string>
+
+</resources>
