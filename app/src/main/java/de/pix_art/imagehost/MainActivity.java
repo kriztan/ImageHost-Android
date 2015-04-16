@@ -50,10 +50,51 @@ public class MainActivity extends ActionBarActivity {
         // Set Cancelable as False
         prgDialog.setCancelable(false);
 
-        
+	try {
+	    Intent intent = getIntent();
+	    String action = intent.getAction();
+	    String type = intent.getType();
+	    if (Intent.ACTION_SEND.equals(action) && type != null && type.startsWith("image/")) {
+		displayImageFromIntent(intent);
+	    }
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.fail, Toast.LENGTH_LONG).show();
+        }
     }
 
 
+    public void displayImageFromIntent(Intent data) {
+	// Get the Image from data
+	Uri selectedImage = data.getData();
+	String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+	if (selectedImage == null)
+	    selectedImage = data.getParcelableExtra(Intent.EXTRA_STREAM);
+
+	// Get the cursor
+	Cursor cursor = getContentResolver().query(selectedImage,
+		filePathColumn, null, null, null);
+	// Move to first row
+	cursor.moveToFirst();
+
+	int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+	imgPath = cursor.getString(columnIndex);
+	cursor.close();
+	ImageView imgView = (ImageView) findViewById(R.id.imgView);
+	// Set the Image in ImageView
+	BitmapFactory.Options imageview = null;
+	imageview = new BitmapFactory.Options();
+	// resize image
+	imageview.inSampleSize = 2;
+	Bitmap imgageview = BitmapFactory.decodeFile(imgPath, imageview);
+	imgView.setImageBitmap(imgageview);
+
+	// Get the Image's file name
+	String fileNameSegments[] = imgPath.split("/");
+	fileName = fileNameSegments[fileNameSegments.length - 1];
+	// Put file name in Async Http Post Param which will used in Php web app
+	//params.put("filename", fileName);
+    }
 
     public void loadImagefromGallery(View view) {
             // Create intent to Open Image applications like Gallery, Google Photos
@@ -70,34 +111,7 @@ public class MainActivity extends ActionBarActivity {
             // When an Image is picked
             if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
                     && null != data) {
-                // Get the Image from data
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
-
-                // Get the cursor
-                Cursor cursor = getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                // Move to first row
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                imgPath = cursor.getString(columnIndex);
-                cursor.close();
-                ImageView imgView = (ImageView) findViewById(R.id.imgView);
-                // Set the Image in ImageView
-                BitmapFactory.Options imageview = null;
-                imageview = new BitmapFactory.Options();
-                // resize image
-                imageview.inSampleSize = 2;
-                Bitmap imgageview = BitmapFactory.decodeFile(imgPath, imageview);
-                imgView.setImageBitmap(imgageview);
-
-                // Get the Image's file name
-                String fileNameSegments[] = imgPath.split("/");
-                fileName = fileNameSegments[fileNameSegments.length - 1];
-                // Put file name in Async Http Post Param which will used in Php web app
-                //params.put("filename", fileName);
-
+		displayImageFromIntent(data);
             } else {
                 Toast.makeText(this, R.string.no_image,
                         Toast.LENGTH_LONG).show();
