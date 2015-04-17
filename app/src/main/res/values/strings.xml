@@ -13,7 +13,7 @@
     <string name="error_404">Error: Host not found</string>
     <string name="error_500">Server-Error</string>
     <string name="error">An error has occurred</string>
-    <string name="load_image">Select piture</string>
+    <string name="load_image">Select image</string>
     <string name="upload">Upload image</string>
     <string name="share_image">Share image</string>
 
