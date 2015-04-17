@@ -16,5 +16,6 @@
     <string name="load_image">Wähle Bild aus</string>
     <string name="upload">Bild hochladen</string>
     <string name="share_image">Bild teilen</string>
+    <string name="title_activity_preferences">Einstellungen</string>
 
 </resources>
