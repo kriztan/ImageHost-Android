@@ -235,7 +235,6 @@ public class MainActivity extends ActionBarActivity {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String prefServer = SP.getString("pref_server", "http://xmpp.pix-art.de/imagehost");
         client.post(prefServer+"/upload_image.php",
-        client.post("http://xmpp.pix-art.de/imagehost/upload_image.php",
                 params, new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http
                     // response code '200'
