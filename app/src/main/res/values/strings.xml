@@ -16,5 +16,6 @@
     <string name="load_image">Select piture</string>
     <string name="upload">Upload image</string>
     <string name="share_image">Share image</string>
+    <string name="title_activity_preferences">Preferences</string>
 
 </resources>
