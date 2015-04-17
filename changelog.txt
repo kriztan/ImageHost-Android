@@ -1,8 +1,12 @@
+1.4
+- possibility to share images directly from file manager or galery
+- settings menu to specify different servers
+
 1.3
-change imagehost URL to xmpp.pix-art.de
+- change imagehost URL to xmpp.pix-art.de
 
 1.2
-resize image on screen
+- resize image on screen
 
 1.1
-initial release
+- initial release
