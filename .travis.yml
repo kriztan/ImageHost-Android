@@ -1,0 +1,9 @@
+language: android
+android:
+  components:
+    - platform-tools
+    - tools
+    - build-tools-21.1.2
+    - android-21
+before_script:
+  - chmod +x gradlew
