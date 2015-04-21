@@ -6,6 +6,8 @@ import java.io.InputStream;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ClipboardManager;
+import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -244,6 +246,10 @@ public class MainActivity extends ActionBarActivity {
                         prgDialog.hide();
                         //Toast.makeText(getApplicationContext(), response,
                         //        Toast.LENGTH_LONG).show();
+
+			// put URL into clipboard
+			ClipboardManager cm = (ClipboardManager)MainActivity.this.getSystemService(CLIPBOARD_SERVICE);
+			cm.setPrimaryClip(ClipData.newPlainText(fileName, response));
 
                         // share link
                         Intent sendIntent = new Intent();
