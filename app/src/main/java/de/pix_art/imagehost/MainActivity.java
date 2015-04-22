@@ -294,6 +294,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onDestroy() {
+    	finish();
         // TODO Auto-generated method stub
         super.onDestroy();
         // Dismiss the progress bar when application is closed
