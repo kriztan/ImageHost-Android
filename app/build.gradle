@@ -11,11 +11,23 @@ android {
         versionName '1.5 beta'
     }
     buildTypes {
-        ImageHost {
-            minifyEnabled true
-        }
+                release {
+                    minifyEnabled true
+                }
     }
     productFlavors {
+    }
+
+    applicationVariants.all { variant ->
+        if (variant.name.equals('release')) {
+            variant.outputs.each { output ->
+                if (output.zipAlign != null) {
+                    output.zipAlign.outputFile = new File(output.outputFile.parent, rootProject.name + "-${variant.versionName}.apk")
+                }
+                output.packageApplication.outputFile = new File(output.outputFile.parent, output.packageApplication.outputFile.name
+                        .replace(".apk", "-${variant.versionName}.apk"))
+            }
+        }
     }
 }
 
