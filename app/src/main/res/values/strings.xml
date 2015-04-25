@@ -17,5 +17,8 @@
     <string name="upload">Upload image</string>
     <string name="share_image">Share image</string>
     <string name="title_activity_preferences">Preferences</string>
+    <string name="action_info">Info</string>
+    <string name="version_info">Version: 1.5 beta</string>
+    <string name="version">Version</string>
 
 </resources>

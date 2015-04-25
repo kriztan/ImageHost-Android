@@ -83,9 +83,10 @@ public class MainActivity extends ActionBarActivity {
                 Intent i = new Intent(this, PreferencesActivity.class);
                 startActivity(i);
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
+            case R.id.info:
+                break;
         }
+        return true;
     }
 
 

@@ -9,11 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class PreferencesActivity extends PreferenceActivity {
+public class PreferencesActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_preferences);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new PreferencesFragment()).commit();
         //addPreferencesFromResource(R.xml.preferences);
     }
