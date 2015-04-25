@@ -1,3 +1,8 @@
+1.5 beta
+- added version info in menu
+- close app directly after sharing image
+- improved preferences layout
+
 1.4
 - possibility to share images directly from file manager or galery
 - settings menu to specify different servers
