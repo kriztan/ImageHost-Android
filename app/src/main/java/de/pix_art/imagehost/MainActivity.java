@@ -260,6 +260,7 @@ public class MainActivity extends ActionBarActivity {
                         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
                         // share link via button
                         finish();
+                        System.exit(0);
 
                     }
 
@@ -296,6 +297,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
     	finish();
+        System.exit(0);
         // TODO Auto-generated method stub
         super.onDestroy();
         // Dismiss the progress bar when application is closed

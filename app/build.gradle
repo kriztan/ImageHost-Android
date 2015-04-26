@@ -8,7 +8,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
-        versionName '1.5 beta'
+        versionName '1.5 beta 2'
     }
     buildTypes {
                 release {
@@ -24,8 +24,7 @@ android {
                 if (output.zipAlign != null) {
                     output.zipAlign.outputFile = new File(output.outputFile.parent, rootProject.name + "-${variant.versionName}.apk")
                 }
-                output.packageApplication.outputFile = new File(output.outputFile.parent, output.packageApplication.outputFile.name
-                        .replace(".apk", "-${variant.versionName}.apk"))
+
             }
         }
     }
