@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.pix_art.imagehost"
-    android:versionName="@string/version" android:versionCode="1.5 beta 2">
+    package="de.pix_art.imagehost">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -30,7 +29,8 @@
         </activity>
         <activity
             android:name=".PreferencesActivity"
-            android:label="@string/title_activity_preferences" >
+            android:label="@string/title_activity_preferences" 
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

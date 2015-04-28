@@ -1,6 +1,7 @@
 package de.pix_art.imagehost;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 import android.annotation.SuppressLint;
@@ -38,6 +39,7 @@ import com.loopj.android.http.RequestParams;
 @SuppressLint("NewApi")
 
 public class MainActivity extends ActionBarActivity {
+    private static final String TAG = "EXIF:";
     static int w = 1920;
     static int h = 1920;
     private static int RESULT_LOAD_IMG = 1;
@@ -89,6 +91,37 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
+    //exif rotation
+    private int getExifOrientation(){
+        ExifInterface exif;
+        int orientation = 0;
+        try {
+            exif = new ExifInterface( imgPath );
+            orientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 1 );
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        }
+        Log.d(TAG, "got orientation " + orientation);
+        return orientation;
+    }
+
+    // get rotation
+    private int getBitmapRotation() {
+        int rotation = 0;
+        switch ( getExifOrientation() ) {
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                rotation = 180;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                rotation = 90;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                rotation = 270;
+                break;
+        }
+
+        return rotation;
+    }
 
     public void displayImageFromIntent(Intent data) {
 	// Get the Image from data
@@ -107,14 +140,21 @@ public class MainActivity extends ActionBarActivity {
 	int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
 	imgPath = cursor.getString(columnIndex);
 	cursor.close();
+        
 	ImageView imgView = (ImageView) findViewById(R.id.imgView);
 	// Set the Image in ImageView
 	BitmapFactory.Options imageview = null;
 	imageview = new BitmapFactory.Options();
-	// resize image
+    // create a matrix for the manipulation
+    Matrix matrix = new Matrix();
+    // rotate the Bitmap
+    matrix.postRotate(getBitmapRotation());
+    // resize image
 	imageview.inSampleSize = 2;
-	Bitmap imgageview = BitmapFactory.decodeFile(imgPath, imageview);
-	imgView.setImageBitmap(imgageview);
+	Bitmap newimageview = BitmapFactory.decodeFile(imgPath, imageview);
+    // recreate the new Bitmap
+    Bitmap rotatedBitmap = Bitmap.createBitmap(newimageview , 0, 0, newimageview .getWidth(), newimageview .getHeight(), matrix, true);
+	imgView.setImageBitmap(rotatedBitmap);
 
 	// Get the Image's file name
 	String fileNameSegments[] = imgPath.split("/");
@@ -184,10 +224,6 @@ public class MainActivity extends ActionBarActivity {
                 int imageHeight = options.outHeight; // get the height
                 int imageWidth = options.outWidth; // get the width
 
-
-
-                // resize image
-                //options.inSampleSize = 3;
                 options.inJustDecodeBounds = true;
                 Bitmap bm = BitmapFactory.decodeFile(imgPath, options);
 
@@ -204,11 +240,18 @@ public class MainActivity extends ActionBarActivity {
                     }
 
                 options.inJustDecodeBounds = false;
-                bm = BitmapFactory.decodeFile(imgPath, options);
+
+                // create a matrix for the manipulation
+                Matrix matrix = new Matrix();
+                // rotate the Bitmap
+                matrix.postRotate(getBitmapRotation());
+                Bitmap newbm = BitmapFactory.decodeFile(imgPath, options);
+                // recreate the new Bitmap
+                Bitmap rotatedBm = Bitmap.createBitmap(newbm , 0, 0, newbm .getWidth(), newbm .getHeight(), matrix, true);
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 // Must compress the Image to reduce image size to make upload easy
-                bm.compress(Bitmap.CompressFormat.JPEG, 75, stream);
+                rotatedBm.compress(Bitmap.CompressFormat.JPEG, 75, stream);
                 byte[] byte_arr = stream.toByteArray();
                 // Encode Image to String
                 encodedString = Base64.encodeToString(byte_arr, 0);
