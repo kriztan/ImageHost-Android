@@ -1,10 +1,16 @@
+1.5 beta 3
+- added image rotation based on EXIF information
+
+1.5 beta 2
+- modified app exit behaviour
+
 1.5 beta
 - added version info in menu
 - close app directly after sharing image
 - improved preferences layout
 
 1.4
-- possibility to share images directly from file manager or galery
+- possibility to share images directly from file manager or gallery
 - settings menu to specify different servers
 
 1.3
