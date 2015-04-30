@@ -16,5 +16,6 @@
     <string name="upload">Bild hochladen</string>
     <string name="share_image">Bild teilen</string>
     <string name="title_activity_preferences">Einstellungen</string>
+    <string name="no_connection">Du bist nicht verbunden, bitte später erneut versuchen</string>
 
 </resources>

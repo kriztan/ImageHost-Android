@@ -1,10 +1,6 @@
-1.5 beta 3
+1.5
+- added connection check before trying to upload an image
 - added image rotation based on EXIF information
-
-1.5 beta 2
-- modified app exit behaviour
-
-1.5 beta
 - added version info in menu
 - close app directly after sharing image
 - improved preferences layout

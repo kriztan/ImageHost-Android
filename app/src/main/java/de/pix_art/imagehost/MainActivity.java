@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.ClipboardManager;
 import android.content.ClipData;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -17,6 +18,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 import android.graphics.Matrix;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -70,6 +73,16 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager connMan = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = connMan.getActiveNetworkInfo();
+        if (ni == null) {
+            // There are no active networks.
+            return false;
+        } else
+            return true;
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -153,7 +166,7 @@ public class MainActivity extends ActionBarActivity {
 	imageview.inSampleSize = 2;
 	Bitmap newimageview = BitmapFactory.decodeFile(imgPath, imageview);
     // recreate the new Bitmap
-    Bitmap rotatedBitmap = Bitmap.createBitmap(newimageview , 0, 0, newimageview .getWidth(), newimageview .getHeight(), matrix, true);
+    Bitmap rotatedBitmap = Bitmap.createBitmap(newimageview, 0, 0, newimageview.getWidth(), newimageview.getHeight(), matrix, true);
 	imgView.setImageBitmap(rotatedBitmap);
 
 	// Get the Image's file name
@@ -162,8 +175,13 @@ public class MainActivity extends ActionBarActivity {
 	// Put file name in Async Http Post Param which will used in Php web app
 	//params.put("filename", fileName);
 
+	if (isNetworkConnected()){
 	// immediately upload the image
 	uploadImage(null);
+    } else {
+        Toast.makeText(this, R.string.no_connection,
+                Toast.LENGTH_LONG).show();
+    }
     }
 
     public void loadImagefromGallery(View view) {
