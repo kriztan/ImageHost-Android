@@ -47,3 +47,5 @@ local.properties
 .gradle
 *.iml
 build
+import-summary.txt
+local.properties
