@@ -11,7 +11,7 @@
     <string name="convert_image">Bild wird verarbeitet</string>
     <string name="error_404">Fehler: Der Host kann nicht gefunden werden</string>
     <string name="error_500">Serverfehler</string>
-    <string name="error">Es ist ein Fehler aufgetreten. HTTP Status Code:</string>
+    <string name="error">Es ist ein Fehler aufgetreten</string>
     <string name="load_image">Wähle Bild aus</string>
     <string name="upload">Bild hochladen</string>
     <string name="share_image">Bild teilen</string>

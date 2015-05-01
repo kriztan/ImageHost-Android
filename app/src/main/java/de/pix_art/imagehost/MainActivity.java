@@ -69,7 +69,7 @@ public class MainActivity extends ActionBarActivity {
 		displayImageFromIntent(intent);
 	    }
         } catch (Exception e) {
-            Toast.makeText(this, R.string.fail, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getText(R.string.fail), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -179,7 +179,7 @@ public class MainActivity extends ActionBarActivity {
 	// immediately upload the image
 	uploadImage(null);
     } else {
-        Toast.makeText(this, R.string.no_connection,
+        Toast.makeText(this, getText(R.string.no_connection),
                 Toast.LENGTH_LONG).show();
     }
     }
@@ -201,11 +201,12 @@ public class MainActivity extends ActionBarActivity {
                     && null != data) {
 		displayImageFromIntent(data);
             } else {
-                Toast.makeText(this, R.string.no_image,
+                Toast.makeText(this, getText(R.string.no_image),
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            Toast.makeText(this, R.string.fail, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getText(R.string.fail), 
+                    Toast.LENGTH_LONG).show();
         }
 
     }
@@ -222,7 +223,7 @@ public class MainActivity extends ActionBarActivity {
         } else {
             Toast.makeText(
                     getApplicationContext(),
-                    R.string.choose_image,
+                    getText(R.string.choose_image),
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -278,7 +279,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             protected void onPostExecute(String msg) {
-                prgDialog.setMessage(getString(R.string.uploading));
+                prgDialog.setMessage(getText(R.string.uploading));
                 // Put converted Image string into Async Http Post param
                 params.put("image", encodedString);
                 // Trigger Image upload
@@ -293,7 +294,7 @@ public class MainActivity extends ActionBarActivity {
 
     // Make Http call to upload Image to Php server
     public void makeHTTPCall() {
-        prgDialog.setMessage(getString(R.string.convert_image));
+        prgDialog.setMessage(getText(R.string.convert_image));
         AsyncHttpClient client = new AsyncHttpClient();
         // Don't forget to change the IP address to your LAN address. Port no as well.
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -336,20 +337,19 @@ public class MainActivity extends ActionBarActivity {
                         // When Http response code is '404'
                         if (statusCode == 404) {
                             Toast.makeText(getApplicationContext(),
-                                    R.string.error_404,
+                                    getText(R.string.error_404),
                                     Toast.LENGTH_LONG).show();
                         }
                         // When Http response code is '500'
                         else if (statusCode == 500) {
                             Toast.makeText(getApplicationContext(),
-                                    R.string.error_500,
+                                    getText(R.string.error_500),
                                     Toast.LENGTH_LONG).show();
                         }
                         // When Http response code other than 404, 500
                         else {
                             Toast.makeText(getApplicationContext(),
-                                    R.string.error
-                                            + statusCode, Toast.LENGTH_LONG).show();
+                                    getText(R.string.error), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
