@@ -18,7 +18,7 @@
     <string name="share_image">Share image</string>
     <string name="title_activity_preferences">Preferences</string>
     <string name="action_info" translatable="false">Info</string>
-    <string name="version_info" translatable="false">Version: 1.5</string>
+    <string name="version_info" translatable="false">Version: 1.6</string>
     <string name="version" translatable="false">Version</string>
     <string name="no_connection">You are not connected, try again later</string>
 
