@@ -1,3 +1,6 @@
+1.6
+- weblinks to imagehost will be opened in the app instead of the browser
+
 1.5
 - added connection check before trying to upload an image
 - added image rotation based on EXIF information
